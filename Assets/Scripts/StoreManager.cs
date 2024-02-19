@@ -37,6 +37,7 @@ public class SubscriptionItem
 
 public class StoreManager : IStoreListener
 {
+    IStoreController storeController;
     [Header("In App Products")]
     public ConsumableItem consumableItem;
     public NonConsumableItem nonConsumableItem;
@@ -78,6 +79,10 @@ public class StoreManager : IStoreListener
     
     
     }
+    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
+    {
+       storeController= controller;
+    }
     public void OnInitializeFailed(InitializationFailureReason error)
     {
         throw new NotImplementedException();
@@ -98,8 +103,5 @@ public class StoreManager : IStoreListener
         throw new NotImplementedException();
     }
 
-    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
-    {
-        throw new NotImplementedException();
-    }
+   
 }

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class StoreManager : MonoBehaviour, IStoreListener
 {
-    [Header("In App Products")]
+    
     
     public List<string> InAppProducts;
 

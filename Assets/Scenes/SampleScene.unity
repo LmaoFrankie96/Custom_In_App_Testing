@@ -1903,22 +1903,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b48878fb4e8804c9f311aec40209f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumableItem:
-    id: 
-    name: 
-    description: 
-    price: 0
-  nonConsumableItem:
-    id: 
-    name: 
-    description: 
-    price: 0
-  subscriptionItem:
-    id: 
-    name: 
-    description: 
-    price: 0
-    timeDuration: 0
+  InAppProducts:
+  - coins500
+  - newbike
+  - elite
 --- !u!1 &1776131699
 GameObject:
   m_ObjectHideFlags: 0

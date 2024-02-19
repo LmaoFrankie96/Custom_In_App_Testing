@@ -51,7 +51,7 @@ public class StoreManager : MonoBehaviour, IStoreListener
     }
     private void BuyProductID(string MproductID)
     {
-
+        if(IsInitialized()==false) Debug.Log("Store controller is NOT initialized and is being called from buyproductID function");
         if (IsInitialized())
         {
             Debug.Log("Store controller is initialized and is being called from buyproductID function");
@@ -123,7 +123,7 @@ public class StoreManager : MonoBehaviour, IStoreListener
     }
     private bool IsInitialized()
     {
-
+        
         return storeController != null;
     }
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)

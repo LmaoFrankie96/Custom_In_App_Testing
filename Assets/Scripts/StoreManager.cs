@@ -101,7 +101,12 @@ public class StoreManager : MonoBehaviour, IStoreListener
             /*builder.AddProduct(consumableItem.id, ProductType.Consumable);
             builder.AddProduct(nonConsumableItem.id, ProductType.NonConsumable);
             builder.AddProduct(subscriptionItem.id, ProductType.Subscription);*/
+            for (int i = 0; i < InAppProducts.Count;i++) {
 
+                if (i == 0) builder.AddProduct(InAppProducts[i], ProductType.Consumable);
+                if (i == 1) builder.AddProduct(InAppProducts[i], ProductType.NonConsumable);
+                if (i == 2) builder.AddProduct(InAppProducts[i], ProductType.Subscription);
+            }
             UnityPurchasing.Initialize(this, builder);
         }
 
@@ -113,23 +118,23 @@ public class StoreManager : MonoBehaviour, IStoreListener
     }
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
-        UnityEngine.Debug.Log("Store controller initialized");
+        Debug.Log("Store controller initialized");
         storeController = controller;
     }
     public void OnInitializeFailed(InitializationFailureReason error)
     {
-        UnityEngine.Debug.Log("Purchase Failed");
+        Debug.Log("Purchase Failed");
     }
 
     public void OnInitializeFailed(InitializationFailureReason error, string message)
     {
-        UnityEngine.Debug.Log("Purchase Failed");
+        Debug.Log("Purchase Failed");
     }
 
 
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
-        UnityEngine.Debug.Log("Purchase Failed");
+        Debug.Log("Purchase Failed");
     }
 
 

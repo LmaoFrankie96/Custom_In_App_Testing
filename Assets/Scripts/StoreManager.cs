@@ -34,7 +34,7 @@ public class SubscriptionItem
     public int timeDuration;
 }
 
-public class StoreManager : IStoreListener
+public class StoreManager : MonoBehaviour, IStoreListener
 {
     [Header("In App Products")]
     public ConsumableItem consumableItem;

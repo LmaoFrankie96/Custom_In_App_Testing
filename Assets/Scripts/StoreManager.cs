@@ -5,43 +5,12 @@ using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
 
-[Serializable]
-public class ConsumableItem
-{
 
-    public string id;
-    public string name;
-    public string description;
-    public float price;
-}
-[Serializable]
-public class NonConsumableItem
-{
-
-    public string id;
-    public string name;
-    public string description;
-    public float price;
-}
-
-[Serializable]
-public class SubscriptionItem
-{
-
-    public string id;
-    public string name;
-    public string description;
-    public float price;
-    public int timeDuration;
-}
 
 public class StoreManager : MonoBehaviour, IStoreListener
 {
     [Header("In App Products")]
-    public ConsumableItem consumableItem;
-    public NonConsumableItem nonConsumableItem;
-    public SubscriptionItem subscriptionItem;
-
+    
     public List<string> InAppProducts;
 
     IStoreController storeController;
@@ -102,21 +71,7 @@ public class StoreManager : MonoBehaviour, IStoreListener
             }
         }
     }
-    public void ConsumableButtonPressed()
-    {
-
-        storeController.InitiatePurchase(consumableItem.id);
-    }
-    public void NonConsumableButtonPressed()
-    {
-        storeController.InitiatePurchase(nonConsumableItem.id);
-
-    }
-    public void SubscriptionButtonPressed()
-    {
-        storeController.InitiatePurchase(subscriptionItem.id);
-
-    }
+    
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
     {
         PurchaseProcessingResult flag = PurchaseProcessingResult.Pending;

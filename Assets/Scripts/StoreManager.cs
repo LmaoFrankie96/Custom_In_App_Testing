@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
@@ -37,7 +36,6 @@ public class SubscriptionItem
 
 public class StoreManager : IStoreListener
 {
-    IStoreController storeController;
     [Header("In App Products")]
     public ConsumableItem consumableItem;
     public NonConsumableItem nonConsumableItem;
@@ -46,6 +44,7 @@ public class StoreManager : IStoreListener
     [Header("Inventory Items")]
     public Text coinsText;
 
+    IStoreController storeController;
     private void Start()
     {
         SetUI();
@@ -57,15 +56,40 @@ public class StoreManager : IStoreListener
 
         coinsText.text = PlayerPrefs.GetInt("Coins").ToString();
     }
-    public void ConsumableButtonPressed() { 
-    
-        
+    public void ConsumableButtonPressed() {
+
+        storeController.InitiatePurchase(consumableItem.id);
     }
     public void NonConsumableButtonPressed()
     {
-
+        storeController.InitiatePurchase(nonConsumableItem.id);
 
     }
+    public void SubscriptionButtonPressed()
+    {
+        storeController.InitiatePurchase(subscriptionItem.id);
+
+    }
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
+    {
+        var product = purchaseEvent.purchasedProduct;
+        if (product.definition.id == consumableItem.id) {
+        
+
+        }
+        else if (product.definition.id == nonConsumableItem.id)
+        {
+
+
+        }
+        else if (product.definition.id == subscriptionItem.id)
+        {
+
+
+        }
+        return PurchaseProcessingResult.Complete;
+    }
+
     private void SetupBuilder() {
 
 
@@ -81,26 +105,23 @@ public class StoreManager : IStoreListener
     }
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
-       storeController= controller;
+        UnityEngine.Debug.Log("Store controller initialized");
+        storeController= controller;
     }
     public void OnInitializeFailed(InitializationFailureReason error)
     {
-        throw new NotImplementedException();
+        UnityEngine.Debug.Log("Purchase Failed");
     }
 
     public void OnInitializeFailed(InitializationFailureReason error, string message)
     {
-        throw new NotImplementedException();
+        UnityEngine.Debug.Log("Purchase Failed");
     }
 
-    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
-        throw new NotImplementedException();
+        UnityEngine.Debug.Log("Purchase Failed");
     }
 
    

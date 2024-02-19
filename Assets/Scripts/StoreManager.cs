@@ -42,7 +42,6 @@ public class StoreManager : MonoBehaviour, IStoreListener
     }
     private void Start()
     {
-        //SetUI();
         SetupBuilder();
     }
     public void BuyProduct(int num)
@@ -55,7 +54,7 @@ public class StoreManager : MonoBehaviour, IStoreListener
 
         if (IsInitialized())
         {
-
+            Debug.Log("Store controller is initialized and is being called from buyproductID function");
             Product product = storeController.products.WithID(MproductID);
 
             if (product != null && product.availableToPurchase)
@@ -83,6 +82,7 @@ public class StoreManager : MonoBehaviour, IStoreListener
             {
 
                 Debug.Log($"Product with product ID: {InAppProducts[i]} has been successfully purchased");
+                PurchaseSuccess(InAppProducts[i]);
                 flag = PurchaseProcessingResult.Complete;
                 break;
             }
@@ -90,17 +90,27 @@ public class StoreManager : MonoBehaviour, IStoreListener
 
         return flag;
     }
+    public void PurchaseSuccess(string id) {
 
+        switch (id) {
+
+            case "coins500":
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins",0) + 500);
+                break;
+            case "newbike":
+                PlayerPrefs.SetInt("Bike1", 1);
+                break;
+            case "elite":
+                PlayerPrefs.SetInt("Elite", 1);
+                break;
+        }
+    }
     private void SetupBuilder()
     {
 
         if (IsInitialized())
         {
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-
-            /*builder.AddProduct(consumableItem.id, ProductType.Consumable);
-            builder.AddProduct(nonConsumableItem.id, ProductType.NonConsumable);
-            builder.AddProduct(subscriptionItem.id, ProductType.Subscription);*/
             for (int i = 0; i < InAppProducts.Count;i++) {
 
                 if (i == 0) builder.AddProduct(InAppProducts[i], ProductType.Consumable);

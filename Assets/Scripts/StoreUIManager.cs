@@ -10,4 +10,20 @@ public class StoreUIManager : MonoBehaviour
     public Text coin500Price;
     public Text newBikePrice;
     public Text elitePrice;
+
+    private void Start()
+    {
+        SetWallet();
+    }
+
+
+    public void BuyCoinsIAP(int num) {
+        //Debug.Log("I am being clicked");
+        StoreManager.Instance.BuyProduct(num);
+        SetWallet();
+    }
+    private void SetWallet() { 
+    
+        coinText.text = PlayerPrefs.GetInt("Coins",0).ToString();
+    }
 }

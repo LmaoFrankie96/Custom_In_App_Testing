@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using UnityEngine.Purchasing.Extension;
 using UnityEngine.UI;
 
 
@@ -38,11 +39,11 @@ public class StoreManager : MonoBehaviour, IStoreListener
             _instance = this;
             DontDestroyOnLoad(this);
         }
-
+        SetupBuilder();
     }
     private void Start()
     {
-        SetupBuilder();
+        
     }
     public void BuyProduct(int num)
     {
@@ -111,7 +112,8 @@ public class StoreManager : MonoBehaviour, IStoreListener
         if (IsInitialized())
         {
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-            for (int i = 0; i < InAppProducts.Count;i++) {
+            for (int i = 0; i < InAppProducts.Count; i++)
+            {
 
                 if (i == 0) builder.AddProduct(InAppProducts[i], ProductType.Consumable);
                 if (i == 1) builder.AddProduct(InAppProducts[i], ProductType.NonConsumable);
@@ -119,7 +121,10 @@ public class StoreManager : MonoBehaviour, IStoreListener
             }
             UnityPurchasing.Initialize(this, builder);
         }
+        else {
 
+            Debug.Log("Store controller is not initialized and builder also not initialized");
+        }
     }
     private bool IsInitialized()
     {

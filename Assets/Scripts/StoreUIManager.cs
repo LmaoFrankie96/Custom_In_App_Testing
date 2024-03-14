@@ -7,23 +7,50 @@ public class StoreUIManager : MonoBehaviour
 {
     [Header("In App Texts")]
     public Text coinText;
+    public Image bikeImage;
     public Text coin500Price;
     public Text newBikePrice;
     public Text elitePrice;
 
+    [Header("In App Buttons")]
+    public Button coinBtn;
+    public Button bikeBtn;
+    public Button eliteBtn;
+
     private void Start()
     {
-        SetWallet();
+        UpdateWallet();
     }
 
 
-    public void BuyCoinsIAP(int num) {
+    public void BuyIAP(int num)
+    {
         //Debug.Log("I am being clicked");
         StoreManager.Instance.BuyProduct(num);
-        SetWallet();
+        UpdateWallet();
     }
-    private void SetWallet() { 
-    
-        coinText.text = PlayerPrefs.GetInt("Coins",0).ToString();
+    private void UpdateWallet()
+    {
+
+        coinText.text = PlayerPrefs.GetInt("Coins", 0).ToString();
+        if (PlayerPrefs.GetInt("Bike1", 0) == 1)
+        {
+            bikeImage.gameObject.SetActive(true);
+            bikeBtn.interactable = false;
+            newBikePrice.text = "Purchased";
+        }
+        if (PlayerPrefs.GetInt("Coins", 0) >= 15000)
+        {
+            coinBtn.interactable = false;
+            coin500Price.text = "Purchased";
+        }
+        if (PlayerPrefs.GetInt("Elite", 0) == 1)
+        {
+
+            eliteBtn.interactable = false;
+            elitePrice.text = "Purchased";
+
+        }
     }
+
 }

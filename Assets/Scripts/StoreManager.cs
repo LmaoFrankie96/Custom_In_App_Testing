@@ -3,13 +3,10 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 
 
-
-
-
 public class StoreManager : MonoBehaviour, IStoreListener
 {
-    
-    
+
+
     public List<string> InAppProducts;
 
     private static IStoreController storeController;
@@ -40,10 +37,7 @@ public class StoreManager : MonoBehaviour, IStoreListener
         }
         InitializePurchasing();
     }
-    private void Start()
-    {
-        
-    }
+    
     public void BuyProduct(int num)
     {
 
@@ -51,7 +45,7 @@ public class StoreManager : MonoBehaviour, IStoreListener
     }
     private void BuyProductID(string MproductID)
     {
-        if(IsInitialized()==false) Debug.Log("Store controller is NOT initialized and is being called from buyproductID function");
+        if (IsInitialized() == false) Debug.Log("Store controller is NOT initialized and is being called from buyproductID function");
         if (IsInitialized())
         {
             Debug.Log("Store controller is initialized and is being called from buyproductID function");
@@ -70,7 +64,7 @@ public class StoreManager : MonoBehaviour, IStoreListener
             }
         }
     }
-    
+
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
     {
         PurchaseProcessingResult flag = PurchaseProcessingResult.Pending;
@@ -90,12 +84,14 @@ public class StoreManager : MonoBehaviour, IStoreListener
 
         return flag;
     }
-    public void PurchaseSuccess(string id) {
+    public void PurchaseSuccess(string id)
+    {
 
-        switch (id) {
+        switch (id)
+        {
 
             case "coins500":
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins",0) + 500);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins", 0) + 500);
                 break;
             case "newbike":
                 PlayerPrefs.SetInt("Bike1", 1);
@@ -125,8 +121,8 @@ public class StoreManager : MonoBehaviour, IStoreListener
     }
     private bool IsInitialized()
     {
-        Debug.Log(storeController);
-        return storeController != null && extensionProvider!=null;
+        
+        return storeController != null && extensionProvider != null;
     }
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {

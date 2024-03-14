@@ -407,7 +407,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1084574296}
         m_TargetAssemblyTypeName: StoreUIManager, Assembly-CSharp
-        m_MethodName: BuyCoinsIAP
+        m_MethodName: BuyIAP
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1353,9 +1353,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 1776131701}
+  bikeImage: {fileID: 168379145}
   coin500Price: {fileID: 2100895113}
   newBikePrice: {fileID: 20339034}
   elitePrice: {fileID: 993854955}
+  coinBtn: {fileID: 134217681}
+  bikeBtn: {fileID: 1220443198}
+  eliteBtn: {fileID: 680948863}
 --- !u!1 &1099075845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,7 +1519,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1220443196}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1084574296}
+        m_TargetAssemblyTypeName: StoreUIManager, Assembly-CSharp
+        m_MethodName: BuyIAP
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1221788207
 GameObject:
   m_ObjectHideFlags: 0

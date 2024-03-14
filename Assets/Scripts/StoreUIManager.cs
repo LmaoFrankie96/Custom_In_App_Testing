@@ -7,7 +7,6 @@ public class StoreUIManager : MonoBehaviour
 {
     [Header("In App Texts")]
     public Text coinText;
-    public Image bikeImage;
     public Text coin500Price;
     public Text newBikePrice;
     public Text elitePrice;
@@ -17,6 +16,9 @@ public class StoreUIManager : MonoBehaviour
     public Button bikeBtn;
     public Button eliteBtn;
 
+    [Header("In App Images")]
+    public Image bikeImage;
+    public Image eliteImage;
     private void Start()
     {
         UpdateWallet();
@@ -46,7 +48,7 @@ public class StoreUIManager : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Elite", 0) == 1)
         {
-
+            eliteImage.gameObject.SetActive(true);
             eliteBtn.interactable = false;
             elitePrice.text = "Purchased";
 

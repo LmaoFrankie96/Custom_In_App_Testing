@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
-using UnityEngine.Purchasing.Extension;
-using UnityEngine.UI;
+
 
 
 
@@ -14,7 +12,8 @@ public class StoreManager : MonoBehaviour, IStoreListener
     
     public List<string> InAppProducts;
 
-    IStoreController storeController;
+    private static IStoreController storeController;
+    private static IExtensionProvider extensionProvider;
     public static StoreManager _instance;
     public static StoreManager Instance
     {
@@ -39,7 +38,7 @@ public class StoreManager : MonoBehaviour, IStoreListener
             _instance = this;
             DontDestroyOnLoad(this);
         }
-        SetupBuilder();
+        InitializePurchasing();
     }
     private void Start()
     {
@@ -106,35 +105,34 @@ public class StoreManager : MonoBehaviour, IStoreListener
                 break;
         }
     }
-    private void SetupBuilder()
+    public void InitializePurchasing()
     {
 
         if (IsInitialized())
         {
-            var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-            for (int i = 0; i < InAppProducts.Count; i++)
-            {
-
-                if (i == 0) builder.AddProduct(InAppProducts[i], ProductType.Consumable);
-                if (i == 1) builder.AddProduct(InAppProducts[i], ProductType.NonConsumable);
-                if (i == 2) builder.AddProduct(InAppProducts[i], ProductType.Subscription);
-            }
-            UnityPurchasing.Initialize(this, builder);
+            return;
         }
-        else {
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+        for (int i = 0; i < InAppProducts.Count; i++)
+        {
 
-            Debug.Log("Store controller is not initialized and builder also not initialized");
+            if (i == 0) builder.AddProduct(InAppProducts[i], ProductType.Consumable);
+            if (i == 1) builder.AddProduct(InAppProducts[i], ProductType.NonConsumable);
+            if (i == 2) builder.AddProduct(InAppProducts[i], ProductType.Subscription);
         }
+        UnityPurchasing.Initialize(this, builder);
+        Debug.Log("Store controller is initialized and builder also initialized in InitializePurchasing() function");
     }
     private bool IsInitialized()
     {
-        
-        return storeController != null;
+        Debug.Log(storeController);
+        return storeController != null && extensionProvider!=null;
     }
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
         Debug.Log("Store controller initialized");
         storeController = controller;
+        extensionProvider = extensions;
     }
     public void OnInitializeFailed(InitializationFailureReason error)
     {
